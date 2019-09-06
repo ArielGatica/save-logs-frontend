@@ -17,6 +17,7 @@
                         :loading="loader"
                         loading-text="Cargando datos..."
                     />
+
                 </v-card>
             </v-flex>
         </v-layout>
@@ -25,6 +26,7 @@
 
 <script>
     import axios from 'axios';
+    import moment from 'moment';
     import { environments } from '../environments/environments';
 
     export default {
@@ -43,6 +45,11 @@
                 { text: 'Equipment', value: 'equipment_id' }
             ]
         }),
+        created(){
+            dateFormat: (date) =>{
+                moment(date).format('YYYY-MM-DD');
+            }
+        },
         beforeMount(){
             let self = this;
 
