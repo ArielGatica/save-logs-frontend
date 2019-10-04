@@ -4,15 +4,30 @@
             <v-flex xs10 mt-12>
                 <v-card>
                     <!--TOOLBAR-->
-                    <v-toolbar dark height="80" style="background-color:#0072B0; color:#FFF">
+                    <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
                             <v-icon>developer_mode</v-icon> OLT Commands
                         </v-toolbar-title>
+
+                        <v-spacer></v-spacer>
+
+                        <v-flex xs4>
+                            <v-text-field
+                                v-model="search"
+                                solo-inverted
+                                color="#FF3D00"
+                                append-icon="search"
+                                hide-details
+                            />
+                        </v-flex>
+
+                        <v-spacer></v-spacer>
                     </v-toolbar>
 
                     <!--TABLE-->
                     <v-data-table
                         :items="items"
+                        :search="search"
                         :headers="headers"
                         :loading="loader"
                         loading-text="Cargando datos..."
@@ -30,6 +45,7 @@
 
     export default {
         data:() =>({
+            search: '',
             loader: true,
             items: [],
             headers: [

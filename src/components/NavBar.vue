@@ -1,8 +1,8 @@
 <template>
-    <v-app-bar app height="70" color="#0072B0" dark>
+    <v-app-bar app height="72" color="#025BFF" dark>
         <v-toolbar-title class="headline text-uppercase">
             <v-img
-                width="70"
+                width="90"
                 height="65"
                 :src="imgLogo"
             />
@@ -36,7 +36,7 @@
 <script>
     export default {
         data: () =>({
-            imgLogo: require('../assets/entel-logo-blue.png')
+            imgLogo: require('../assets/new-logo.jpg')
         })
     }
 </script>

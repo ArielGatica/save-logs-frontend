@@ -4,19 +4,40 @@
             <v-flex xs10 mt-12>
                 <v-card>
                     <!--TOOLBAR-->
-                    <v-toolbar dark height="80" style="background-color:#0072B0; color:#FFF">
+                    <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
                             <v-icon>add_alert</v-icon> OLT Recovery
                         </v-toolbar-title>
+
+                        <v-spacer></v-spacer>
+
+                        <v-flex xs4>
+                            <v-text-field
+                                v-model="search"
+                                solo-inverted
+                                color="#FF3D00"
+                                append-icon="search"
+                                hide-details
+                            />
+                        </v-flex>
+
+                        <v-spacer></v-spacer>
                     </v-toolbar>
 
                     <!--TABLE-->
                     <v-data-table
                         :items="items"
+                        :search="search"
                         :headers="headers"
                         :loading="loader"
                         loading-text="Cargando datos..."
-                    />
+                    >
+
+                        <template v-slot:item.olt_fault_id="{ item }">
+                            <v-icon color="#01E9B9">{{ item.olt_fault_id !== undefined ? 'check_circle' : null }}</v-icon>
+                        </template>
+
+                    </v-data-table>
 
                 </v-card>
             </v-flex>
@@ -31,23 +52,26 @@
 
     export default {
         data:() =>({
+            search: '',
             loader: true,
             items: [],
             headers: [
                 { text: 'Date', value: 'date' },
+                { text: 'Microseconds', value: 'date_microseconds' },
                 { text: 'IP', value: 'ip' },
                 { text: 'Severity', value: 'severity' },
-                { text: 'Alarm Name', value: 'alarm_name'},
+                //{ text: 'Alarm Name', value: 'alarm_name'},
                 { text: 'Frame', value: 'frame_id' },
                 { text: 'Slot', value: 'slot_id' },
                 { text: 'Port', value: 'port_id' },
                 { text: 'Ont', value: 'ont_id' },
-                { text: 'Equipment', value: 'equipment_id' }
+                { text: 'Equipment', value: 'equipment_id' },
+                { text: 'Match', value: 'olt_fault_id'}
             ]
         }),
         created(){
             dateFormat: (date) =>{
-                moment(date).format('YYYY-MM-DD');
+                moment(date).format('YYYY-MM-DD HH:mm:ss');
             }
         },
         beforeMount(){

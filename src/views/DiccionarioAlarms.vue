@@ -4,7 +4,7 @@
             <v-flex xs10 mt-12>
                 <v-card>
                     <!--TOOLBAR-->
-                    <v-toolbar dark height="80" style="background-color:#0072B0; color:#FFF">
+                    <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
                             <v-icon>import_contacts</v-icon> Alarms Dictionary
                         </v-toolbar-title>                                               
@@ -15,7 +15,7 @@
                             <v-text-field
                                 v-model="search"
                                 solo-inverted
-                                color="warning"
+                                color="#FF3D00"
                                 append-icon="search"
                                 hide-details
                             />
@@ -82,12 +82,14 @@
                                     :rules="someRules"
                                     append-icon="notifications"
                                     label="Fault"
+                                    color="#0034F9"
                                 />
                                 <v-text-field
                                     v-model="dataAlarms.recovery"
                                     :rules="someRules"
                                     append-icon="add_alert"
                                     label="Recovery"
+                                    color="#0034F9"
                                 />
                             </v-flex>
                         </v-form>
@@ -97,14 +99,15 @@
                         <v-btn
                             @click="dialogAdd = false; resetForm(); loadBtn = false"
                             dark
-                            color="#0072AE">                            
+                            color="#FF3D00">                            
                             Cancelar
                         </v-btn>
                         <v-btn
                             :disabled="!valid"
                             @click="addAlarms()"
                             :loading="loadBtn"
-                            color="warning">
+                            color="#0034F9"
+                            style="color:#FFFFFF">
                             Agregar
                         </v-btn>
                     </v-card-actions>
@@ -126,13 +129,13 @@
                         <v-btn
                             @click="dialogRemove = false"
                             dark
-                            color="#0072AE">
+                            color="#FF3D00">
                             Cancelar
                         </v-btn>
                         <v-btn
                             @click="removeAlarms()"
                             dark
-                            color="#F78F1E">
+                            color="#0034F9">
                             Eliminar
                         </v-btn>
                     </v-card-actions>
@@ -140,19 +143,19 @@
             </v-dialog>
 
             <!--SNACKBAR-->
-            <v-snackbar v-model="snack" color="success" top :timeout="timeSnack" v-if="this.msgRes !== undefined">
+            <v-snackbar v-model="snack" color="#01E9B9" style="color:#0034F9" top :timeout="timeSnack" v-if="this.msgRes !== undefined">
                 {{msgRes}}
                 <v-spacer/>
                 <v-btn icon @click="snack = false">
-                    <v-icon>done_outline</v-icon>
+                    <v-icon color="#0034F9">done_outline</v-icon>
                 </v-btn>
             </v-snackbar>
 
-            <v-snackbar v-model="snackInfo" dark top :timeout="timeSnack">
+            <v-snackbar v-model="snackInfo" color="#FF3D00" top :timeout="timeSnack">
                 Debes seleccionar al menos un registro para realizar esta acción.
                 <v-spacer/>
                 <v-btn icon @click="snackInfo = false">
-                    <v-icon color="red">announcement</v-icon>
+                    <v-icon>announcement</v-icon>
                 </v-btn>
             </v-snackbar>
 
