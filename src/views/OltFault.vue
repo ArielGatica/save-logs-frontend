@@ -7,7 +7,7 @@
                     <!--TOOLBAR-->
                     <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
-                            <v-icon>notifications</v-icon> OLT Fault
+                            <v-icon size="33">notifications</v-icon> OLT Fault
                         </v-toolbar-title>
                         
                         <v-spacer></v-spacer>
@@ -24,17 +24,29 @@
 
                         <v-spacer></v-spacer>
 
+                        <v-btn icon large @click="removeAlarms()">
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+
                     </v-toolbar>
 
                     <!--{{ msgSnack }}-->
 
                     <!--TABLE-->
                     <v-data-table
+                        v-model="selected"
+                        show-select
+                        single-select
+                        item-key="_id"
                         :items="items"
                         :search="search"
                         :headers="headers"
                         :loading="loader"
                         loading-text="Cargando datos..."
+                        :footer-props="{
+                            prevIcon: 'arrow_back_ios',
+                            nextIcon: 'arrow_forward_ios'
+                        }"
                     >
 
                         <template v-slot:item.olt_recovery_id="{ item }">
@@ -51,6 +63,15 @@
             </v-btn>
             -->
 
+            <!--SNACKBAR-->
+            <v-snackbar v-model="snack" color="#01E9B9" style="color:#0034F9" top :timeout="timeSnack" v-if="this.msgRes !== undefined">
+                {{msgRes}}
+                <v-spacer/>
+                <v-btn icon @click="snack = false">
+                    <v-icon color="#0034F9">done_outline</v-icon>
+                </v-btn>
+            </v-snackbar>
+
         </v-layout>
     </v-container>
 </template>
@@ -63,6 +84,10 @@
 
     export default {
         data:()=>({
+            timeSnack: 6000,
+            snack: false,
+            msgRes: '',
+            selected: [],
             search: '',
             loader: true,
             items: [],
@@ -107,6 +132,18 @@
         methods:{
             done(){
                 store.commit('increment');
+            },
+            removeAlarms(){
+                axios.delete(`${environments.API_BACKEND_ALARMAS}logs/olt-fault/delete/${this.selected[0]._id}`)
+                .then((res) =>{
+                    if(res.status == 200){
+                        let index = this.items.indexOf(this.selected[0]._id);
+                        this.items.splice(index, 1);
+                        this.snack = true;
+                        this.msgRes = res.data.message;
+                    }
+                })
+                .catch((err) => { console.error(err) });
             }
         }
     }   

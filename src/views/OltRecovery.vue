@@ -6,7 +6,7 @@
                     <!--TOOLBAR-->
                     <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
-                            <v-icon>add_alert</v-icon> OLT Recovery
+                            <v-icon size="33">notifications_none</v-icon> OLT Recovery
                         </v-toolbar-title>
 
                         <v-spacer></v-spacer>
@@ -31,6 +31,10 @@
                         :headers="headers"
                         :loading="loader"
                         loading-text="Cargando datos..."
+                        :footer-props="{
+                            prevIcon: 'arrow_back_ios',
+                            nextIcon: 'arrow_forward_ios'
+                        }"
                     >
 
                         <template v-slot:item.olt_fault_id="{ item }">

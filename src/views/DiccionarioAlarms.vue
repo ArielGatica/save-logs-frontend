@@ -6,7 +6,7 @@
                     <!--TOOLBAR-->
                     <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
-                            <v-icon>import_contacts</v-icon> Alarms Dictionary
+                            <v-icon size="33">library_books</v-icon> Alarms Dictionary
                         </v-toolbar-title>                                               
 
                         <v-spacer/>
@@ -24,7 +24,7 @@
                         <v-spacer/>
                         <v-tooltip v-model="iconDel" bottom>
                             <template v-slot:activator="{ on }">
-                                <v-btn icon v-on="on" @click="selected[0] !== undefined ? dialogRemove = true : snackInfo = true">
+                                <v-btn large icon v-on="on" @click="selected[0] !== undefined ? dialogRemove = true : snackInfo = true">
                                     <v-icon>delete</v-icon>
                                 </v-btn>
                             </template>
@@ -33,7 +33,7 @@
 
                         <v-tooltip v-model="iconEdit" bottom>
                             <template v-slot:activator="{ on }">
-                                <v-btn icon v-on="on" @click="selected[0] !== undefined ? null : snackInfo = true">
+                                <v-btn large icon v-on="on" @click="selected[0] !== undefined ? null : snackInfo = true">
                                     <v-icon>edit</v-icon>
                                 </v-btn>
                             </template>
@@ -43,7 +43,7 @@
 
                         <v-tooltip v-model="iconAdd" bottom>
                             <template v-slot:activator="{ on }">
-                                <v-btn icon v-on="on" @click="dialogAdd = true">
+                                <v-btn large icon v-on="on" @click="dialogAdd = true">
                                     <v-icon>add</v-icon>
                                 </v-btn>
                             </template>
@@ -64,6 +64,10 @@
                         :loading="loader"
                         loading-text="Cargando datos..."
                         no-results-text="No se encontraron datos"
+                        :footer-props="{
+                            prevIcon: 'arrow_back_ios',
+                            nextIcon: 'arrow_forward_ios'
+                        }"
                     />
                 </v-card>
             </v-flex>
@@ -247,7 +251,7 @@
                         this.items.splice(index, 1);
                         this.dialogRemove = false;
                         this.snack = true;
-                        this.msgRes = res.data.message
+                        this.msgRes = res.data.message;
                     }
                 })
                 .catch((err) => { console.error(err) });

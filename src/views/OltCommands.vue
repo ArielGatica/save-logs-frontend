@@ -6,7 +6,7 @@
                     <!--TOOLBAR-->
                     <v-toolbar dark height="80" style="background-color:#025BFF; color:#FFF">
                         <v-toolbar-title class="headline">
-                            <v-icon>developer_mode</v-icon> OLT Commands
+                            <v-icon size="33">code</v-icon> OLT Commands
                         </v-toolbar-title>
 
                         <v-spacer></v-spacer>
@@ -31,6 +31,10 @@
                         :headers="headers"
                         :loading="loader"
                         loading-text="Cargando datos..."
+                        :footer-props="{
+                            prevIcon: 'arrow_back_ios',
+                            nextIcon: 'arrow_forward_ios'
+                        }"
                     />
                 </v-card>
             </v-flex>

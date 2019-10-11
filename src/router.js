@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import DiccionarioAlarmas from './views/DiccionarioAlarms';
 import OltFault from './views/OltFault';
-import OltRecovery from './views/OltRecovery'
-import OltCommands from './views/OltCommands'
+import OltRecovery from './views/OltRecovery';
+import OltCommands from './views/OltCommands';
 
 Vue.use(Router)
 
